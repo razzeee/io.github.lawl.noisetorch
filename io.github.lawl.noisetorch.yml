@@ -1,0 +1,22 @@
+app-id: io.github.lawl.noisetorch
+runtime: org.freedesktop.Platform
+runtime-version: "21.08"
+sdk: org.freedesktop.Sdk
+command: noisetorch
+modules:
+  - name: noisetorch
+    buildsystem: simple
+    build-commands:
+      - mkdir /app/bin
+      - cp ".local/bin/noisetorch" "/app/bin/noisetorch"
+      # - sudo setcap 'CAP_SYS_RESOURCE=+ep' /app/bin/noisetorch
+    sources:
+      - type: archive
+        url: https://github.com/lawl/NoiseTorch/releases/download/0.11.3/NoiseTorch_x64.tgz
+        sha256: 5b5d18157df9caf9188a7bb2b0cbb93a8b7a887fa5b29c5c4b5c2e11c927f1f0
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --filesystem=home:ro
